@@ -4,6 +4,5 @@ WORKDIR /apps
 COPY requirements.txt /apps/
 RUN pip install -r requirements.txt
 COPY . /apps/
-COPY /home/jenkins/config/.env /apps/
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "config.wsgi.application"]

@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 environ.Env.read_env(
     env_file=os.path.join('/apps','.env')
+    #env_file=os.path.join(BASE_DIR,'.env')
 )
 pymysql.install_as_MySQLdb()
 
@@ -98,7 +99,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': os.environ.get('DB_HOST'),
-        'PORT': '3306',
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
@@ -136,7 +137,7 @@ USE_TZ = True
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_REGION = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'ddarahakit'
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
@@ -146,6 +147,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 # https://intrepidgeeks.com/tutorial/aws-s3-access-denied-error-when-packet-policy-fails 참고
 # https://kimcoder.tistory.com/381
 AWS_DEFAULT_ACL = 'public-read'
+#AWS_DEFAULT_ACL = 'None'
 AWS_LOCATION = 'static'
 
 # Static files (CSS, JavaScript, Images)

@@ -10,7 +10,7 @@ podTemplate(label: 'builder',
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.19.16', command: 'cat', ttyEnabled: true)
             ],
             volumes: [
-                hostPathVolume(mountPath: '/home/jenkins/agent/workspace/ddarahakit-shop', hostPath: '/home/k8s/django'),
+                hostPathVolume(mountPath: '/home/jenkins/agent/workspace/config', hostPath: '/home/k8s/django'),
                 hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
             ]) {
     node('builder') {

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ddarahakitshop-main-service
+spec:
+  ports:
+    - name: "ddarahakitshop-main-service-port"
+      port: 8000
+      targetPort: 8000
+      nodePort: 31001
+  selector:
+    app: ddarahakitshop-main
+  type: NodePort

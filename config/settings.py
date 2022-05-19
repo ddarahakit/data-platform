@@ -21,7 +21,7 @@ env = environ.Env(
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 environ.Env.read_env(
-    env_file=os.path.join('/home/jenkins/agent/workspace/config','.env')
+    env_file=os.path.join('/home/jenkins/config','.env')
 )
 pymysql.install_as_MySQLdb()
 

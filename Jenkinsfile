@@ -26,7 +26,7 @@ podTemplate(label: 'builder',
 
                         sh "ls -al"
                         sh "ls -al /home/jenkins/config/"
-                        sh "cp /home/jenkins/config/.env /apps/.env"
+                        sh "cp /home/jenkins/config/.env ./.env"
                         sh "ls -al"
                         sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
                         sh "docker login -u ${USERNAME} -p ${PASSWORD}"

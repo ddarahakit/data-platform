@@ -1,4 +1,4 @@
-def DOCKER_IMAGE_NAME = "ddarahakit/msa-member"           // 생성하는 Docker image 이름
+def DOCKER_IMAGE_NAME = "ddarahakit/ddarahakitshop-main"           // 생성하는 Docker image 이름
 def DOCKER_IMAGE_TAGS = "0.1"  // 생성하는 Docker image 태그
 def NAMESPACE = "ns-project"
 def VERSION = "${env.BUILD_NUMBER}"
@@ -52,11 +52,11 @@ podTemplate(label: 'builder',
                         /*sh "echo ${VERSION}"
                         sh "sed -i.bak 's#VERSION_STRING#${VERSION}#' ./k8s/k8s-deployment.yaml"*/
                         sh "echo ${DATE}"
-                        sh "sed -i.bak 's#DATE_STRING#${DATE}#' ./k8s-deployment-msa-member.yaml"
+                        sh "sed -i.bak 's#DATE_STRING#${DATE}#' ./ddarahakitshop-main-deployment.yaml"
 
                         /* yaml파일로 배포를 수행한다 */
-                        sh "kubectl apply -f ./k8s-deployment-msa-member.yaml -n ${NAMESPACE}"
-                        sh "kubectl apply -f ./k8s-service-msa-member.yaml -n ${NAMESPACE}"
+                        sh "kubectl apply -f ./ddarahakitshop-main-deployment.yaml -n ${NAMESPACE}"
+                        sh "kubectl apply -f ./ddarahakitshop-main-service.yaml -n ${NAMESPACE}"
                 }
             }
         }

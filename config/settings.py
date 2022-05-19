@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
 import pymysql
 import os
 import environ
@@ -29,9 +28,6 @@ environ.Env.read_env(
 )
 pymysql.install_as_MySQLdb()
 
-
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -42,7 +38,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -96,21 +91,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'onlineshop',
+        'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': os.environ.get('DB_HOST'),
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -129,7 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -153,9 +145,9 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
-#https://arikong.tistory.com/21 참고
-#https://intrepidgeeks.com/tutorial/aws-s3-access-denied-error-when-packet-policy-fails 참고
-#https://kimcoder.tistory.com/381
+# https://arikong.tistory.com/21 참고
+# https://intrepidgeeks.com/tutorial/aws-s3-access-denied-error-when-packet-policy-fails 참고
+# https://kimcoder.tistory.com/381
 AWS_DEFAULT_ACL = 'public-read'
 AWS_LOCATION = 'static'
 
@@ -169,6 +161,7 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 AUTHENTICATION_NACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

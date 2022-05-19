@@ -10,6 +10,7 @@ podTemplate(label: 'builder',
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.19.16', command: 'cat', ttyEnabled: true)
             ],
             volumes: [
+                hostPathVolume(mountPath: '/home/jenkins/agent/workspace/ddarahakit-shop', hostPath: '/home/k8s/django'),
                 hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
             ]) {
     node('builder') {
@@ -22,7 +23,9 @@ podTemplate(label: 'builder',
                     credentialsId: 'docker_hub_auth',
                     usernameVariable: 'USERNAME',
                     passwordVariable: 'PASSWORD')]) {
-                        /* ./build/libs 생성된 jar파일을 도커파일을 활용하여 도커 빌드를 수행한다 */
+
+                        sh "ls -al"
+                        sh "ls"
                         sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
                         sh "docker login -u ${USERNAME} -p ${PASSWORD}"
                         sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"

@@ -25,7 +25,7 @@ podTemplate(label: 'builder',
                     passwordVariable: 'PASSWORD')]) {
 
                         sh "ls -al"
-                        sh "ls"
+                        sh "ls /home/jenkins/config/"
                         sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
                         sh "docker login -u ${USERNAME} -p ${PASSWORD}"
                         sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"

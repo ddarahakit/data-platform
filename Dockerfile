@@ -1,6 +1,7 @@
 FROM python:3.9-slim-buster
 WORKDIR /apps
 COPY . /apps/
+RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get -y update && apt-get -y install gcc libmariadb-dev
 RUN pip install -r requirements.txt
 EXPOSE 8000

@@ -158,86 +158,15 @@
             </section>
 
             <form class="order-form lg-only" action="/" method="POST">
-              <div class="order-inputs">
-                <div class="select-group is-active">
-                  <select class="form-select" id="select-1" required>
-                    <option value="">선택</option>
-                    <option value="1">선택사항 1</option>
-                    <option value="2">선택사항 2</option>
-                    <option value="3">선택사항 3</option>
-                    <option value="4">선택사항 4</option>
-                    <option value="5">선택사항 5</option>
-                  </select>
-                  <i class="ic-caret" aria-hidden></i>
-                </div>
-
-                <div class="select-group">
-                  <select class="form-select" id="select-2">
-                    <option value="">추가상품 (선택)</option>
-                    <option value="1">선택사항 1</option>
-                    <option value="2">선택사항 2</option>
-                    <option value="3">선택사항 3</option>
-                    <option value="4">선택사항 4</option>
-                    <option value="5">선택사항 5</option>
-                  </select>
-                  <i class="ic-caret" aria-hidden></i>
-                </div>
-              </div>
 
               <div class="order-checkouts">
                 <ul class="checkout-list">
                   <li class="checkout-item">
-                    <div class="checkout-card">
-                      <header class="checkout-header">
-                        <h4 class="checkout-title">
-                          추가상품 - 맛있는 제주 감귤을 직배송 / 제주도 귤 판매
-                          1위 믿고 구매하세요.
-                        </h4>
 
-                        <button
-                          class="delete-button"
-                          type="button"
-                          aria-label="해당 상품을 삭제하기"
-                        >
-                          <i class="ic-close" aria-hidden="true"></i>
-                        </button>
-                      </header>
-
-                      <footer class="checkout-footer">
-                        <div class="checkout-select">
-                          <select class="" id="checkout-item-1">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                          </select>
-                          <i class="ic-caret" aria-hidden></i>
-                        </div>
-
-                        <output class="checkout-output" for="checkout-item-1">
-                          <div class="price-16">
-                            <strong class="amount">{{product.price}}</strong>
-                            <span class="currency">원</span>
-                          </div>
-                        </output>
-                      </footer>
-                    </div>
                   </li>
                 </ul>
               </div>
 
-              <dl class="order-summary">
-                <dt>주문금액</dt>
-                <dd>
-                  <output for="select-1 select-2">
-                    <div class="price-20">
-                      <strong class="amount">0</strong>
-                      <span class="currency">원</span>
-                    </div>
-                  </output>
-                </dd>
-              </dl>
 
               <div class="button-group">
                 <button class="btn-outlined btn-55" type="button">
@@ -737,84 +666,9 @@
               action="/"
               method="POST"
             >
-              <div class="order-inputs">
-                <div class="select-group is-active">
-                  <select
-                    class="form-select"
-                    id="floating-order-form-select-1"
-                    required
-                  >
-                    <option value="">선택</option>
-                    <option value="1">선택사항 1</option>
-                    <option value="2">선택사항 2</option>
-                    <option value="3">선택사항 3</option>
-                    <option value="4">선택사항 4</option>
-                    <option value="5">선택사항 5</option>
-                  </select>
-                  <i class="ic-caret" aria-hidden></i>
-                </div>
 
-                <div class="select-group">
-                  <select class="form-select" id="floating-order-form-select-2">
-                    <option value="">추가상품 (선택)</option>
-                    <option value="1">선택사항 1</option>
-                    <option value="2">선택사항 2</option>
-                    <option value="3">선택사항 3</option>
-                    <option value="4">선택사항 4</option>
-                    <option value="5">선택사항 5</option>
-                  </select>
-                  <i class="ic-caret" aria-hidden></i>
-                </div>
-              </div>
 
-              <div class="order-checkouts">
-                <ul class="checkout-list">
-                  <li class="checkout-item">
-                    <div class="checkout-card">
-                      <header class="checkout-header">
-                        <h4 class="checkout-title">
-                          추가상품 - 맛있는 제주 감귤을 직배송 / 제주도 귤 판매
-                          1위 믿고 구매하세요.
-                        </h4>
 
-                        <button
-                          class="delete-button"
-                          type="button"
-                          aria-label="해당 상품을 삭제하기"
-                        >
-                          <i class="ic-close" aria-hidden="true"></i>
-                        </button>
-                      </header>
-
-                      <footer class="checkout-footer">
-                        <div class="checkout-select">
-                          <select
-                            class=""
-                            id="floating-order-form-checkout-item-1"
-                          >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                          </select>
-                          <i class="ic-caret" aria-hidden></i>
-                        </div>
-
-                        <output
-                          class="checkout-output"
-                          for="floating-order-form-checkout-item-1"
-                        >
-                          <div class="price-16">
-                            <strong class="amount">{{product.price|intcomma}}</strong>
-                            <span class="currency">원</span>
-                          </div>
-                        </output>
-                      </footer>
-                    </div>
-                  </li>
-                </ul>
-              </div>
 
               <dl class="order-summary">
                 <dt>주문금액</dt>

@@ -1,7 +1,7 @@
 FROM python:3.9-slim-buster
 WORKDIR /apps
 COPY . /apps/
-RUN rm -rf /var/lib/apt/lists/*
+RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";" | cat > /etc/apt/apt.conf.d/10no--check-valid-until
 RUN apt-get -y update && apt-get -y install gcc libmariadb-dev
 RUN pip install -r requirements.txt
 EXPOSE 8000

@@ -1,5 +1,4 @@
-FROM python:3.9-slim
-
+FROM python:3.9-slim-buster
 WORKDIR /apps
 COPY . /apps/
 RUN apt-get update && apt-get -y install gcc libmariadb-dev

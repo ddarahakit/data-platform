@@ -8,7 +8,7 @@ class Category(models.Model):
 
     slug = models.SlugField(max_length=200, db_index=True, unique=True, allow_unicode=True)
 
-    class Meata:
+    class Meta:
         ordering = ['name']
         verbose_name = 'category'
         verbose_name_plural = 'categories'
@@ -24,12 +24,10 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='products')
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True, allow_unicode=True)
-
-    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
-
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=0)
+    sale_price = models.DecimalField(max_digits=10, decimal_places=0)
     stock = models.PositiveIntegerField()
 
     available_display = models.BooleanField('Display', default=True)
@@ -38,7 +36,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    class Meata:
+    class Meta:
         ordering = ['-created']
         index_together = [['id','slug']]
 
@@ -47,3 +45,7 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.id, self.slug])
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)

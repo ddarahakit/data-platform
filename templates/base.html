@@ -1,71 +1,630 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3da5f5" />
+    <meta name="msapplication-TileColor" content="#2b5797" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <header class="global-header">
+      <div class="gnb">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="gnb-wrapper">
+                <div class="gnb-left">
+                  <h1 class="logo">
+                    <a href="/">
+                      <img src="{% static 'assets/images/Logo.svg' %}" alt="내일의 집" />
+                    </a>
+                  </h1>
 
-    <!-- jquery slim 지우고 minified 추가 -->
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            crossorigin="anonymous">
-    </script>
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous">
-    </script>
-    <script
-            rc="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous">
-    </script>
+                  <nav class="gnb-nav sm-hidden">
+                    <h2 class="visually-hidden">메뉴</h2>
+                    <ul class="gnb-nav-list">
+                      <li class="gnb-nav-item">
+                        <a href="./index.html">커뮤니티</a>
+                      </li>
+                      <li class="gnb-nav-item is-active">
+                        <a href="./index.html">스토어홈</a>
+                      </li>
 
-    {% block script %}
-    {% endblock %}
+                    </ul>
+                  </nav>
 
-    {% block style %}
-    {% endblock %}
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">test Shop</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-    <ul class="navbar-nav justify-content-end">
-        <li class="nav-item">
-            {% if user.is_authenticated %}
-            <a class="nav-link btn btn-outline-success">Welcome, {{ user.first_name }}</a>
-            {% endif %}
-            </a>
-        </li>
-        &nbsp;
-        <li class="nav-item">
-            {% if user.is_authenticated %}
-            <a class="nav-link btn btn-outline-success" href="{% url 'account_logout' %}">Logout</a>
-            {% else %}
-            <a class="nav-link btn btn-outline-success" href="{% url 'account_login' %}">Login</a>
-            {% endif %}
-        </li>
-        &nbsp;
-        <li class="nav-item">
-            <a class="nav-link btn btn-outline-success" href="{% url 'cart:detail' %}">Cart
-                {% if cart|length > 0 %}
-                    ${{ cart.get_total_price }} with {{cart|length}} items
-                {% else %}
-                    : Empty
-                {% endif %}
-            </a>
-        </li>
-    </ul>
-  </div>
-</nav>
-<div class="container">
+                  <button
+                    class="gnb-icon-button is-menu sm-only"
+                    type="button"
+                    aria-label="메뉴 열기 버튼"
+                  >
+                    <i class="ic-menu" aria-hidden="true"></i>
+                  </button>
+                </div>
+
+                <div class="gnb-right">
+                  <div class="gnb-search lg-only">
+                    <div class="input-group">
+                      <i class="ic-search" aria-hidden="true"></i>
+                      <input
+                        class="form-input"
+                        type="text"
+                        placeholder="스토어 검색"
+                      />
+                    </div>
+
+                    <section class="search-history">
+                      <header class="search-history-header">
+                        <h2 class="title">최근 검색어</h2>
+                        <button type="button">전체 삭제</button>
+                      </header>
+
+                      <div class="search-history-content">
+                        <ol class="search-history-list">
+                          <li class="search-history-item">
+                            <button class="word-button" type="button">
+                              듀트 팍
+                            </button>
+                            <button class="delete-button" type="button">
+                              <i class="ic-close" aria-label="검색어 삭제"></i>
+                            </button>
+                          </li>
+                          <li class="search-history-item">
+                            <button class="word-button" type="button">
+                              듀트 팍
+                            </button>
+                            <button class="delete-button" type="button">
+                              <i class="ic-close" aria-label="검색어 삭제"></i>
+                            </button>
+                          </li>
+                          <li class="search-history-item">
+                            <button class="word-button" type="button">
+                              듀트 팍
+                            </button>
+                            <button class="delete-button" type="button">
+                              <i class="ic-close" aria-label="검색어 삭제"></i>
+                            </button>
+                          </li>
+                        </ol>
+                      </div>
+                    </section>
+                  </div>
+                  {% if user.is_authenticated %}
+                  <!-- NOTE: 로그인을 했을 경우 -->
+                  <div class="button-group">
+                    <button
+                      class="gnb-icon-button is-search lg-hidden"
+                      type="button"
+                      aria-label="검색창 열기 버튼"
+                    >
+                      <i class="ic-search" aria-hidden="true"></i>
+                    </button>
+
+                    <a
+                      class="gnb-icon-button sm-hidden"
+                      href="./index.html"
+                      aria-label="스크랩북 페이지로 이동"
+                    >
+                      <i class="ic-bookmark" aria-hidden="true"></i>
+                    </a>
+
+                    <a
+                      class="gnb-icon-button sm-hidden"
+                      href="./index.html"
+                      aria-label="내 소식 페이지로 이동"
+                    >
+                      <i class="ic-bell" aria-hidden="true"></i>
+                    </a>
+
+                    <a
+                      class="gnb-icon-button is-cart"
+                      href="./index.html"
+                      aria-label="장바구니 페이지로 이동"
+                    >
+                      <i class="ic-cart" aria-hidden="true"></i>
+                      <strong class="badge">5</strong>
+                    </a>
+
+                    <div class="my-menu sm-hidden">
+                      <button
+                        class="my-menu-button"
+                        type="button"
+                        aria-label="마이메뉴 열기 버튼"
+                      >
+                        <img
+                          src="{% static 'assets/images/img-user-01.jpg' %}"
+                          alt="사달라 아저씨"
+                        />
+                      </button>
+
+                      <div class="my-menu-content">
+                        <ul class="my-menu-list">
+                          <li class="my-menu-item">
+                            <a href="./index.html">마이페이지</a>
+                          </li>
+                          <li class="my-menu-item">
+                            <a href="./index.html">나의 쇼핑</a>
+                          </li>
+                          <li class="my-menu-item">
+                            <a href="./index.html">이벤트</a>
+                          </li>
+                          <li class="my-menu-item">
+                            <button type="button">로그아웃</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn-primary btn-40 sm-hidden" type="button">
+                    글쓰기
+                    <i class="ic-chevron" aria-hidden></i>
+                  </button>
+                  {% else %}
+                  <!-- NOTE: 로그인을 하지 않은 경우 -->
+                  <div class="button-group">
+                    <button
+                      class="gnb-icon-button is-search lg-hidden"
+                      type="button"
+                      aria-label="검색창 열기 버튼"
+                    >
+                      <i class="ic-search" aria-hidden="true"></i>
+                    </button>
+                    <a
+                      class="gnb-icon-button is-cart"
+                      href="./index.html"
+                      aria-label="장바구니 페이지로 이동"
+                    >
+                      <i class="ic-cart" aria-hidden="true"></i>
+                    </a>
+
+                    <div class="gnb-auth sm-hidden">
+                      <a href="./index.html">로그인</a>
+                      <a href="./index.html">회원가입</a>
+                    </div>
+                  </div>
+                  {% endif %}
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="lnb">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <h1 class="visually-hidden">스토어 메뉴</h1>
+
+              <ul class="lnb-list">
+                <li class="lnb-item is-active">
+                  <a href="./index.html">스토어</a>
+                </li>
+                <li class="lnb-item">
+                  <a href="./index.html">베스트</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="product-show">
 {% block content %}
 {% endblock %}
-</div>
+    </main>
 
-</body>
+
+
+    <footer class="global-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-4">
+            <h3 class="global-footer-title">
+              고객센터
+              <i class="ic-chevron" aria-hidden="true"></i>
+            </h3>
+
+            <a class="global-footer-contact" href="tel:14001400"> 1004-1004 </a>
+
+            <p class="global-footer-time">
+              평일 09:00 ~ 18:00 (주말 &amp; 공휴일 제외)
+            </p>
+
+            <dl class="global-footer-detail-list">
+              <div class="global-footer-detail-item">
+                <dt>상호명</dt>
+                <dd>버그가 너무 많아 김버그</dd>
+              </div>
+              <div class="global-footer-detail-item">
+                <dt>이메일</dt>
+                <dd>
+                  <address>
+                    <a href="mailto:kimbugx@gmail.com"> kimbugx@gmail.com </a>
+                  </address>
+                  (제휴문의)
+                </dd>
+              </div>
+              <div class="global-footer-detail-item">
+                <dt>대표이사</dt>
+                <dd>김버그</dd>
+              </div>
+              <div class="global-footer-detail-item">
+                <dt>주소</dt>
+                <dd>
+                  <address>
+                    <a href="https://youtube.com/c/kimbug" target="_blank">
+                      https://youtube.com/c/kimbug
+                    </a>
+                  </address>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <aside class="sidebar sm-only">
+      <header class="sidebar-header">
+        <h1 class="logo">
+          <a href="./index.html">
+            <img src="{% static 'assets/images/Logo.svg' %}" alt="내일의 집" />
+          </a>
+        </h1>
+
+
+        {% if user.is_authenticated %}
+        <!-- NOTE: 로그인을 했을 경우 -->
+          <div class="sidebar-user">
+            <a href="./index.html">
+              <div class="avatar-24">
+                <img src="{% static 'assets/images/img-user-01.jpg' %}" alt="사달라 아저씨" />
+              </div>
+              <strong class="user-name">사딸라</strong>
+            </a>
+          </div>
+        {% else %}
+        <!-- NOTE: 로그인을 하지 않은 경우 -->
+          <div class="sidebar-auth">
+            <a class="btn-outlined btn-40" href="./index.html">로그인</a>
+            <a class="btn-primary btn-40" href="./index.html">회원가입</a>
+          </div>
+        {% endif %}
+      </header>
+
+      <nav class="sidebar-nav">
+        <h2 class="visually-hidden">메뉴</h2>
+
+        <div class="drawer-menu is-community">
+          <button class="drawer-menu-button" type="button">
+            <i class="ic-community" aria-hidden="true"></i>
+            커뮤니티
+            <i class="ic-chevron" aria-hidden="true"></i>
+          </button>
+
+          <div class="drawer-menu-content">
+            <ul class="drawer-menu-list">
+              <li class="drawer-menu-item">
+                <a href="./index.html">홈</a>
+              </li>
+              <li class="drawer-menu-item">
+                <a href="./index.html">사진</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="drawer-menu is-active is-open is-store">
+          <button class="drawer-menu-button" type="button">
+            <i class="ic-store" aria-hidden="true"></i>
+            스토어
+            <i class="ic-chevron" aria-hidden="true"></i>
+          </button>
+
+          <div class="drawer-menu-content">
+            <ul class="drawer-menu-list">
+              <li class="drawer-menu-item">
+                <a href="./index.html">스토어홈</a>
+              </li>
+              <li class="drawer-menu-item">
+                <a href="./index.html">베스트</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {% if user.is_authenticated %}
+          <!-- NOTE: 로그인을 했을 경우 -->
+          <div class="sidebar-user-menu">
+            <ul class="user-menu-list">
+              <li class="user-menu-item">
+                <a href="./index.html">마이 페이지</a>
+              </li>
+              <li class="user-menu-item">
+                <a href="./index.html">나의 쇼핑</a>
+              </li>
+              <li class="user-menu-item">
+                <a href="./index.html">스크랩북</a>
+              </li>
+              <li class="user-menu-item">
+                <a href="./index.html">알림</a>
+              </li>
+              <li class="user-menu-item">
+                <a href="./index.html">이벤트</a>
+              </li>
+            </ul>
+          </div>
+
+        {% else %}
+          <!-- NOTE: 로그인을 하지 않은 경우 -->
+          <div class="sidebar-user-menu">
+              <ul class="user-menu-list">
+                <li class="user-menu-item">
+                  <a href="./index.html">마이 페이지</a>
+                </li>
+                <li class="user-menu-item">
+                  <a href="./index.html">나의 쇼핑</a>
+                </li>
+                <li class="user-menu-item">
+                  <a href="./index.html">스크랩북</a>
+                </li>
+                <li class="user-menu-item">
+                  <a href="./index.html">알림</a>
+                </li>
+                <li class="user-menu-item">
+                  <a href="./index.html">이벤트</a>
+                </li>
+              </ul>
+            </div>
+        {% endif %}
+
+      </nav>
+    </aside>
+
+    <aside class="search-modal lg-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <header class="search-modal-header">
+              <h1 class="visually-hidden">검색창</h1>
+              <div class="search-modal-form">
+                <div class="input-group">
+                  <i class="ic-search" aria-hidden></i>
+                  <input
+                    class="form-input"
+                    type="text"
+                    placeholder="스토어 검색"
+                  />
+                </div>
+                <button class="btn-ghost btn-40" type="button">취소</button>
+              </div>
+            </header>
+
+            <section class="search-history">
+              <header class="search-history-header">
+                <h2 class="title">최근 검색어</h2>
+                <button type="button">전체 삭제</button>
+              </header>
+
+              <!-- NOTE: 최근 검색어가 존재할 경우 -->
+              <div class="search-history-content">
+                <ol class="search-history-list">
+                  <li class="search-history-item">
+                    <button class="word-button" type="button">듀트 팍</button>
+                    <button class="delete-button" type="button">
+                      <i class="ic-close" aria-label="검색어 삭제"></i>
+                    </button>
+                  </li>
+                  <li class="search-history-item">
+                    <button class="word-button" type="button">듀트 팍</button>
+                    <button class="delete-button" type="button">
+                      <i class="ic-close" aria-label="검색어 삭제"></i>
+                    </button>
+                  </li>
+                  <li class="search-history-item">
+                    <button class="word-button" type="button">듀트 팍</button>
+                    <button class="delete-button" type="button">
+                      <i class="ic-close" aria-label="검색어 삭제"></i>
+                    </button>
+                  </li>
+                </ol>
+              </div>
+
+              <!-- NOTE: 최근 검색어가 존재하지 않을 경우 -->
+              <!-- <div class="search-history-content">
+                <p class="placeholder">최근 검색한 내역이 없습니다.</p>
+              </div> -->
+            </section>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <aside class="order-form-modal lg-hidden">
+      <h1 class="visually-hidden">주문창</h1>
+
+      <form class="order-form" action="/" method="POST">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="order-inputs">
+                <div class="select-group is-active">
+                  <select
+                    class="form-select"
+                    id="order-form-modal-select-1"
+                    required
+                  >
+                    <option value="">선택</option>
+                    <option value="1">선택사항 1</option>
+                    <option value="2">선택사항 2</option>
+                    <option value="3">선택사항 3</option>
+                    <option value="4">선택사항 4</option>
+                    <option value="5">선택사항 5</option>
+                  </select>
+                  <i class="ic-caret" aria-hidden></i>
+                </div>
+
+                <div class="select-group">
+                  <select class="form-select" id="order-form-modal-select-2">
+                    <option value="">추가상품 (선택)</option>
+                    <option value="1">선택사항 1</option>
+                    <option value="2">선택사항 2</option>
+                    <option value="3">선택사항 3</option>
+                    <option value="4">선택사항 4</option>
+                    <option value="5">선택사항 5</option>
+                  </select>
+                  <i class="ic-caret" aria-hidden></i>
+                </div>
+              </div>
+
+              <div class="order-checkouts">
+                <ul class="checkout-list">
+                  <li class="checkout-item">
+                    <div class="checkout-card">
+                      <header class="checkout-header">
+                        <h4 class="checkout-title">
+                          추가상품 - 맛있는 제주 감귤을 직배송 / 제주도 귤 판매
+                          1위 믿고 구매하세요.
+                        </h4>
+
+                        <button
+                          class="delete-button"
+                          type="button"
+                          aria-label="해당 상품을 삭제하기"
+                        >
+                          <i class="ic-close" aria-hidden="true"></i>
+                        </button>
+                      </header>
+
+                      <footer class="checkout-footer">
+                        <div class="checkout-select">
+                          <select
+                            class=""
+                            id="order-form-modal-checkout-item-1"
+                          >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                          <i class="ic-caret" aria-hidden></i>
+                        </div>
+
+                        <output
+                          class="checkout-output"
+                          for="order-form-modal-checkout-item-1"
+                        >
+                          <div class="price-16">
+                            <strong class="amount">32,900</strong>
+                            <span class="currency">원</span>
+                          </div>
+                        </output>
+                      </footer>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <dl class="order-summary">
+                <dt>주문금액</dt>
+                <dd>
+                  <output
+                    for="order-form-modal-select-1 order-form-modal-select-2"
+                  >
+                    <div class="price-20">
+                      <strong class="amount">0</strong>
+                      <span class="currency">원</span>
+                    </div>
+                  </output>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="btn-secondary btn-48" type="button">장바구니</button>
+          <button class="btn-primary btn-48" type="submit">구매하기</button>
+        </div>
+      </form>
+    </aside>
+
+    <aside class="cart-modal">
+      <h1 class="cart-title">장바구니에 상품을 담았습니다</h1>
+
+      <div class="button-group">
+        <a class="btn-48 btn-primary" href="./index.html">장바구니 보러가기</a>
+        <button class="btn-48 btn-secondary" type="button">확인</button>
+      </div>
+    </aside>
+
+    <!-- NOTE: 북마크에 추가한 경우 -->
+    <aside class="bookmark-toast">
+      <h1 class="bookmark-title">스크랩했습니다</h1>
+
+      <button class="close-button" type="button" aria-label="닫기">
+        <i class="ic-close" aria-hidden="true"></i>
+      </button>
+
+      <div class="button-group">
+        <a class="btn-32 btn-outlined" href="./index.html">스크랩북 보기</a>
+        <button class="btn-32 btn-primary" type="button">폴더에 담기</button>
+      </div>
+    </aside>
+
+    <!-- NOTE: 북마크에서 삭제한 경우 -->
+    <!-- <aside class="bookmark-toast">
+      <h1 class="bookmark-title">스크랩북에서 삭제했습니다</h1>
+
+      <button class="close-button" type="button" aria-label="닫기">
+        <i class="ic-close" aria-hidden="true"></i>
+      </button>
+    </aside> -->
+
+    <div class="overlay" aria-hidden="true"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="{% static 'js/carousels.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/sidebar-drawer.js' %}"></script>
+    <script src="{% static 'js/section-header.js' %}"></script>
+    <script src="{% static 'js/search-modal.js' %}"></script>
+    <script src="{% static 'js/order-cta.js' %}"></script>
+    <script src="{% static 'js/my-menu.js' %}"></script>
+    <script src="{% static 'js/gnb-search.js' %}"></script>
+    <script src="{% static 'js/review-button.js' %}"></script>
+    <script src="{% static 'js/product-tab.js' %}"></script>
+  </body>
 </html>

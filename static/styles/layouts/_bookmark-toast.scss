@@ -1,0 +1,88 @@
+.bookmark-toast {
+  $close-button-size: 36px;
+
+  @include flexbox(between);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: $bookmark-toast-level;
+  display: none;
+  width: 100%;
+  height: 54px;
+  padding-right: $grid-margin;
+  padding-left: $close-button-size;
+  background-color: $white;
+  box-shadow: $popup-reserved-shadow;
+
+  &.is-active {
+    display: flex;
+  }
+
+  .bookmark-title {
+    @include text-style(13, $primary);
+    font-weight: 400;
+  }
+
+  .close-button {
+    @include pos-center-y;
+    @include flexbox;
+    left: 0;
+    width: $close-button-size;
+    height: $close-button-size;
+    font-size: 20px;
+    color: $tertiary;
+
+    &:active {
+      color: $secondary;
+    }
+  }
+
+  .button-group {
+    @include flexbox(end);
+
+    a,
+    button {
+      @include text-style(13);
+    }
+
+    a {
+      margin-right: 4px;
+    }
+  }
+
+  @include responsive(D) {
+    @include pos-center-x(fixed);
+    bottom: 40px;
+    width: 480px;
+    height: 80px;
+    padding-right: 20px;
+    padding-left: 56px;
+    border-radius: 8px;
+    box-shadow: $popup-shadow;
+
+    .bookmark-title {
+      @include text-style(16);
+    }
+
+    .close-button {
+      left: (56px - $close-button-size) / 2;
+      font-size: 24px;
+      transition: color 250ms ease-in-out;
+
+      &:hover {
+        color: $secondary;
+      }
+    }
+
+    .button-group {
+      a,
+      button {
+        @include text-style(14);
+      }
+
+      a {
+        margin-right: 8px;
+      }
+    }
+  }
+}

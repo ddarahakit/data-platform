@@ -1,4 +1,4 @@
-FROM python:3.9.13-slim
+FROM ddarahakit/ddarahakitshop-main:0.1
 WORKDIR /apps
 COPY . /apps/
 RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";" | cat > /etc/apt/apt.conf.d/10no--check-valid-until

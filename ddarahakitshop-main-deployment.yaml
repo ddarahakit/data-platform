@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ddarahakitshop-main
-          image: ddarahakit/ddarahakitshop-main:0.1
+          image: ddarahakit/ddarahakitshop-main:0.2
           ports:
             - containerPort: 8000
           imagePullPolicy: Always

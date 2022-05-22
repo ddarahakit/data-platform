@@ -35,7 +35,7 @@
                 <div class="gnb-left">
                   <h1 class="logo">
                     <a href="/">
-                      <img src="{% static 'assets/images/Logo.svg' %}" alt="내일의 집" />
+                      <img src="http://www.ddarahakit.kro.kr/resources/assets/img/logo.png" alt="따라학잇" />
                     </a>
                   </h1>
 
@@ -46,7 +46,7 @@
                         <a href="./index.html">커뮤니티</a>
                       </li>
                       <li class="gnb-nav-item is-active">
-                        <a href="./index.html">스토어홈</a>
+                        <a href="/">스토어홈</a>
                       </li>
 
                     </ul>
@@ -72,41 +72,7 @@
                       />
                     </div>
 
-                    <section class="search-history">
-                      <header class="search-history-header">
-                        <h2 class="title">최근 검색어</h2>
-                        <button type="button">전체 삭제</button>
-                      </header>
 
-                      <div class="search-history-content">
-                        <ol class="search-history-list">
-                          <li class="search-history-item">
-                            <button class="word-button" type="button">
-                              듀트 팍
-                            </button>
-                            <button class="delete-button" type="button">
-                              <i class="ic-close" aria-label="검색어 삭제"></i>
-                            </button>
-                          </li>
-                          <li class="search-history-item">
-                            <button class="word-button" type="button">
-                              듀트 팍
-                            </button>
-                            <button class="delete-button" type="button">
-                              <i class="ic-close" aria-label="검색어 삭제"></i>
-                            </button>
-                          </li>
-                          <li class="search-history-item">
-                            <button class="word-button" type="button">
-                              듀트 팍
-                            </button>
-                            <button class="delete-button" type="button">
-                              <i class="ic-close" aria-label="검색어 삭제"></i>
-                            </button>
-                          </li>
-                        </ol>
-                      </div>
-                    </section>
                   </div>
                   {% if user.is_authenticated %}
                   <!-- NOTE: 로그인을 했을 경우 -->
@@ -149,16 +115,7 @@
                       <div class="my-menu-content">
                         <ul class="my-menu-list">
                           <li class="my-menu-item">
-                            <a href="./index.html">마이페이지</a>
-                          </li>
-                          <li class="my-menu-item">
-                            <a href="./index.html">나의 쇼핑</a>
-                          </li>
-                          <li class="my-menu-item">
-                            <a href="./index.html">이벤트</a>
-                          </li>
-                          <li class="my-menu-item">
-                            <button type="button">로그아웃</button>
+                            <a href="{% url 'account_logout' %}"><button type="button">로그아웃</button></a>
                           </li>
                         </ul>
                       </div>
@@ -166,7 +123,6 @@
                   </div>
                   <button class="btn-primary btn-40 sm-hidden" type="button">
                     글쓰기
-                    <i class="ic-chevron" aria-hidden></i>
                   </button>
                   {% else %}
                   <!-- NOTE: 로그인을 하지 않은 경우 -->
@@ -179,7 +135,7 @@
                       <i class="ic-search" aria-hidden="true"></i>
                     </button>
                     <div class="gnb-auth sm-hidden">
-                      <a href="./index.html">로그인</a>
+                      <a href="{% url 'account_login' %}">로그인</a>
                       <a href="./index.html">회원가입</a>
                     </div>
                   </div>
@@ -203,7 +159,7 @@
 
               <ul class="lnb-list">
                 <li class="lnb-item is-active">
-                  <a href="./index.html">스토어</a>
+                  <a href="/">스토어</a>
                 </li>
                 <li class="lnb-item">
                   <a href="./index.html">베스트</a>
@@ -231,7 +187,7 @@
               <i class="ic-chevron" aria-hidden="true"></i>
             </h3>
 
-            <a class="global-footer-contact" href="tel:14001400"> 1004-1004 </a>
+            <a class="global-footer-contact" href="tel:01077456981"> 010-7745-6981 </a>
 
             <p class="global-footer-time">
               평일 09:00 ~ 18:00 (주말 &amp; 공휴일 제외)
@@ -240,27 +196,27 @@
             <dl class="global-footer-detail-list">
               <div class="global-footer-detail-item">
                 <dt>상호명</dt>
-                <dd>버그가 너무 많아 김버그</dd>
+                <dd>따라하면서 배우는 IT</dd>
               </div>
               <div class="global-footer-detail-item">
                 <dt>이메일</dt>
                 <dd>
                   <address>
-                    <a href="mailto:kimbugx@gmail.com"> kimbugx@gmail.com </a>
+                    <a href="mailto:ddarahakit@gmail.com"> ddarahakit@gmail.com </a>
                   </address>
                   (제휴문의)
                 </dd>
               </div>
               <div class="global-footer-detail-item">
                 <dt>대표이사</dt>
-                <dd>김버그</dd>
+                <dd>심준보</dd>
               </div>
               <div class="global-footer-detail-item">
                 <dt>주소</dt>
                 <dd>
                   <address>
                     <a href="https://youtube.com/c/kimbug" target="_blank">
-                      https://youtube.com/c/kimbug
+                      https://www.youtube.com/channel/UCl9zTDOvOxdCfUt1HqVwwdg
                     </a>
                   </address>
                 </dd>
@@ -275,7 +231,7 @@
       <header class="sidebar-header">
         <h1 class="logo">
           <a href="./index.html">
-            <img src="{% static 'assets/images/Logo.svg' %}" alt="내일의 집" />
+            <img src="http://www.ddarahakit.kro.kr/resources/assets/img/logo.png" alt="따라학잇" />
           </a>
         </h1>
 
@@ -407,41 +363,7 @@
               </div>
             </header>
 
-            <section class="search-history">
-              <header class="search-history-header">
-                <h2 class="title">최근 검색어</h2>
-                <button type="button">전체 삭제</button>
-              </header>
 
-              <!-- NOTE: 최근 검색어가 존재할 경우 -->
-              <div class="search-history-content">
-                <ol class="search-history-list">
-                  <li class="search-history-item">
-                    <button class="word-button" type="button">듀트 팍</button>
-                    <button class="delete-button" type="button">
-                      <i class="ic-close" aria-label="검색어 삭제"></i>
-                    </button>
-                  </li>
-                  <li class="search-history-item">
-                    <button class="word-button" type="button">듀트 팍</button>
-                    <button class="delete-button" type="button">
-                      <i class="ic-close" aria-label="검색어 삭제"></i>
-                    </button>
-                  </li>
-                  <li class="search-history-item">
-                    <button class="word-button" type="button">듀트 팍</button>
-                    <button class="delete-button" type="button">
-                      <i class="ic-close" aria-label="검색어 삭제"></i>
-                    </button>
-                  </li>
-                </ol>
-              </div>
-
-              <!-- NOTE: 최근 검색어가 존재하지 않을 경우 -->
-              <!-- <div class="search-history-content">
-                <p class="placeholder">최근 검색한 내역이 없습니다.</p>
-              </div> -->
-            </section>
           </div>
         </div>
       </div>

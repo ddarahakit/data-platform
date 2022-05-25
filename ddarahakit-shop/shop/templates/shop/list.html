@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% block title %}Category Page{% endblock %}
+{% block content %}
+<div class="container">
+
+    <section
+            class="main-product-section main-product-recommendation"
+            id="product-recommendation"
+            role="tabpanel"
+    >
+        <header class="product-section-header">
+            <h1 class="title">오늘의 딜</h1>
+        </header>
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="product-list">
+                    {% for product in products %}
+                    <li class="product-item">
+                        <a href="{{product.get_absolute_url}}">
+                            <div class="product-card">
+                                {% for product_image in product.productimage_set.all|slice:":1" %}
+                                <div class="product-card-image">
+                                    <img
+                                            src="{{product_image.image.url}}"
+                                            alt=""
+                                    />
+                                </div>
+                                {% endfor %}
+
+
+                                <span class="product-card-brand">emk</span>
+                                <h3 class="product-card-title">
+                                    {{ product.name }}
+                                </h3>
+
+
+                                <div class="product-card-price">
+                                    <span class="percent">{{product.price|sub:product.sale_price|div:product.price|mul:100|add:0}}%</span>
+                                    <strong class="price">{{product.sale_price|intcomma}}</strong>
+                                </div>
+
+
+
+                            </div>
+                        </a>
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

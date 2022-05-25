@@ -1,0 +1,112 @@
+.user-gallery {
+  margin: 0 -#{$grid-margin};
+  overflow: hidden;
+
+  &-slider {
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .thumbnail-list {
+    @include no-scrollbar;
+    @include flexbox(start);
+    padding-left: 2px;
+    overflow-x: auto;
+  }
+
+  .thumbnail-item {
+    margin-right: 4px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.tns-nav-active {
+      button {
+        border: 3px solid $blue;
+      }
+    }
+
+    button {
+      @include flexbox;
+      width: 64px;
+      height: 64px;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    img {
+      display: block;
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+    }
+  }
+
+  &-controls {
+    @include pos-center-y;
+    @include flexbox(between);
+    width: 100%;
+    padding: 0 52px;
+
+    .control-button {
+      @include flexbox;
+      width: 40px;
+      height: 40px;
+      font-size: 28px;
+      color: $primary;
+      background-color: $white;
+      border-radius: 50%;
+      transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
+
+      &.is-prev {
+        i {
+          margin-left: -2px;
+          transform: rotate(90deg);
+        }
+      }
+
+      &.is-next {
+        i {
+          margin-right: -3px;
+          transform: rotate(-90deg);
+        }
+      }
+
+      &:hover {
+        color: $white;
+        background-color: $blue;
+      }
+
+      &[disabled] {
+        visibility: hidden;
+      }
+    }
+  }
+
+  @include responsive(T) {
+    margin: 0;
+
+    &-slider {
+      margin-bottom: 6px;
+    }
+
+    .thumbnail-list {
+      padding-left: 0;
+    }
+
+    .thumbnail-item {
+      button {
+        width: 75px;
+        height: 75px;
+      }
+
+      img {
+        display: block;
+        width: 75px;
+        height: 75px;
+        object-fit: cover;
+      }
+    }
+  }
+}

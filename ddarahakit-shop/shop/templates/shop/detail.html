@@ -1,0 +1,637 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% block title %}Product Detail{% endblock %}
+{% block content %}
+
+      <!-- 상품 상세 페이지 본론 -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="breadcrumb">
+                {% for c in categories %}
+                    <a href="{{c.get_absolute_url}}">{{c.name}}</a>
+                    <i class="ic-chevron" aria-hidden="true"></i>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4 col-md-6 col-lg-7">
+            <div class="product-carousel" role="region">
+              <div class="product-carousel-slider">
+                <ul class="slider-list">
+                  {% for product_image in product_images %}
+                    <li
+                      class="slider-item"
+                      role="tabpanel"
+                      aria-labelledby="product-carousel-tab-{{product_image.count}}"
+                    >
+                      <figure>
+                        <img src="{{product_image.image.url}}" alt="" />
+                        <figcaption class="visually-hidden">
+                          보아르 전기히터 상세 이미지 {{product_image.count}}
+                        </figcaption>
+                      </figure>
+                    </li>
+                  {% endfor %}
+
+
+                </ul>
+              </div>
+
+              <div class="product-carousel-thumbnail">
+                <ol class="thumbnail-list" role="tablist">
+                  {% for product_image in product_images %}
+                    <li
+                      class="thumbnail-item"
+                      role="tab"
+                      id="product-carousel-tab-{{product_image.count}}"
+                    >
+                      <button type="button">
+                        <img
+                          src="{{product_image.image.url}}"
+                          alt="{{product_image.count}}번 이미지"
+                        />
+                      </button>
+                    </li>
+                  {% endfor %}
+
+
+
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-md-6 col-lg-5">
+            <section class="product-info">
+              <header class="product-info-header">
+                <a class="info-brand" href="./index.html">보아르</a>
+
+                <h1 class="info-title">
+                  {{product.name}}
+                </h1>
+
+              </header>
+
+              <!-- NOTE: 모바일용 가격 -->
+              <div class="product-info-price sm-only">
+                <div class="info-original-price">
+                  <div class="discount-rate">
+                    <strong class="rate">{{product.price|sub:product.sale_price|div:product.price|mul:100|add:0}}</strong>
+                    <span class="percent">%</span>
+                  </div>
+
+                  <div class="price-off">
+                    <strong class="amount">{{product.price|intcomma}}</strong>
+                    <span class="currency sm-hidden">원</span>
+                  </div>
+                </div>
+
+                <div class="info-sale-price">
+                  <div class="price-20">
+                    <strong class="amount">{{product.sale_price|intcomma}}</strong>
+                    <span class="currency">원</span>
+                  </div>
+
+                  <strong class="tag-red">특가</strong>
+                </div>
+
+                <p class="info-point">
+                  <strong aria-label="{{product.sale_price|div:20}} 포인트">{{product.sale_price|div:20}}P</strong>
+                  적립해드립니다. (VIP 3배 혜택 적용됨)
+                </p>
+              </div>
+
+              <!-- NOTE: 태블릿 이후 가격 -->
+              <div class="product-info-price sm-hidden">
+                <div class="info-price-wrapper">
+                  <div class="discount-rate">
+                    <strong class="rate">{{product.price|sub:product.sale_price|div:product.price|mul:100|add:0}}</strong>
+                    <span class="percent">%</span>
+                  </div>
+
+                  <div class="info-price">
+                    <div class="price-off">
+                      <strong class="amount">{{product.price|intcomma}}</strong>
+                      <span class="currency">원</span>
+                    </div>
+
+                    <div class="info-sale-price">
+                      <div class="price-32">
+                        <strong class="amount">{{product.sale_price|intcomma}}</strong>
+                        <span class="currency">원</span>
+                      </div>
+
+                      <strong class="tag-red">특가</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="info-point">
+                  <strong aria-label="{{product.sale_price|div:20}} 포인트">{{product.sale_price|div:20}}P</strong>
+                  적립해드립니다. (VIP 3배 혜택 적용됨)
+                </p>
+              </div>
+
+              <div class="product-info-delivery">
+                <span>일반택배</span>
+                <strong class="tag-gray">무료배송</strong>
+              </div>
+            </section>
+
+            <form class="order-form lg-only" action="/" method="POST">
+
+              <div class="order-checkouts">
+                <ul class="checkout-list">
+                  <li class="checkout-item">
+
+                  </li>
+                </ul>
+              </div>
+
+
+              <div class="button-group">
+                <button class="btn-outlined btn-55" type="button">
+                  장바구니
+                </button>
+                <button class="btn-primary btn-55" type="submit">
+                  바로구매
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row sm-only">
+          <div class="col-sm-4">
+            <div
+              class="product-section-divider is-big"
+              aria-hidden="true"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-tab">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 col-lg-8">
+              <ul class="product-tab-list" role="tablist">
+                <li
+                  class="product-tab-item"
+                  role="tab"
+                  aria-labelledby="product-spec"
+                >
+                  <button type="button">상품정보</button>
+                </li>
+<li
+                  class="product-tab-item"
+                  role="tab"
+                  aria-labelledby="product-review"
+                >
+                  <button type="button">
+                    리뷰
+                    <strong class="badge" aria-label="0개">0</strong>
+                  </button>
+                </li>
+                <li
+                  class="product-tab-item"
+                  role="tab"
+                  aria-labelledby="product-inquiry"
+                >
+                  <button>
+                    문의
+                    <strong class="badge" aria-label="0개">0</strong>
+                  </button>
+                </li>
+                <li
+                  class="product-tab-item"
+                  role="tab"
+                  aria-labelledby="product-shipment"
+                >
+                  <button type="button">배송/환불</button>
+                </li>
+                <li
+                  class="product-tab-item"
+                  role="tab"
+                  aria-labelledby="product-recommendation"
+                >
+                  <button type="button">추천</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-lg-8">
+            <section
+              class="product-section product-spec"
+              id="product-spec"
+              role="tabpanel"
+            >
+              <header class="product-section-header sm-hidden">
+                <h1 class="title">상품 정보</h1>
+              </header>
+
+              <div class="product-section-content">
+                <div class="button-wrapper sm-only">
+                  <button class="btn-primary btn-55" type="button">
+                    펼치기
+                  </button>
+                </div>
+
+                <figure>
+                  <img src="{% static 'assets/images/img-detail-01.jpg' %}" alt="" />
+                  <figcaption class="visually-hidden">
+                    보아르 전기 히터 상세 이미지 01
+                  </figcaption>
+                </figure>
+
+
+                <table class="product-table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">품명 및 모델명</th>
+                      <td>VO-HT015</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">KC 인증 필 유무</th>
+                      <td>SU071586-19003</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">정격전압, 소비전력</th>
+                      <td>AC220V, 60Hz, 400W</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">에너지소비효율등급</th>
+                      <td>해당사항없음</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">동일모델의 출시년월</th>
+                      <td>2019.11</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        제조자, 수입품의 경우 수입자를 함께 표기
+                      </th>
+                      <td>보아르주식회사</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">제조국</th>
+                      <td>중국</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">크기</th>
+                      <td>338*122*300 mm</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">냉난방면적</th>
+                      <td>개인용</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">추가설치비용</th>
+                      <td>해당사항없음</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">품질보증기준</th>
+                      <td>구매일로부터 1년 이내 무상 A/S가능</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">A/S 책임자와 전화번호</th>
+                      <td>1661-4555</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <div
+              class="product-section-divider sm-only"
+              aria-hidden="true"
+            ></div>
+
+            <div class="product-shipment" id="product-shipment" role="tabpanel">
+              <header class="product-section-header sm-only">
+                <h1 class="title">배송/교환/환불</h1>
+                <button class="icon-button" type="button" aria-label="더보기">
+                  <i class="ic-chevron" aria-hidden="true"></i>
+                </button>
+              </header>
+
+              <section class="product-section">
+                <header class="product-section-header">
+                  <h1 class="title">배송</h1>
+                </header>
+
+                <div class="product-section-content">
+                  <table class="product-table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">배송</th>
+                        <td>일반택배</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">배송비</th>
+                        <td>무료배송</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">배송불가 지역</th>
+                        <td>배송불가 지역이 없습니다</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <div
+                class="product-section-divider sm-only"
+                aria-hidden="true"
+              ></div>
+
+              <section class="product-section">
+                <header class="product-section-header">
+                  <h1 class="title">교환/환불</h1>
+                </header>
+
+                <div class="product-section-content">
+                  <table class="product-table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">반품배송비</th>
+                        <td>
+                          2,500원 (최초 배송비가 무료인 경우 5,000원 부과)
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">교환배송비</th>
+                        <td>5,000원</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">보내실 곳</th>
+                        <td>(00000) 서울 종로구 누하동</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <div
+                class="product-section-divider sm-only"
+                aria-hidden="true"
+              ></div>
+            </div>
+
+            <section
+              class="product-section product-recommendation"
+              id="product-recommendation"
+              role="tabpanel"
+            >
+              <header class="product-section-header">
+                <h1 class="title">비슷한 상품</h1>
+              </header>
+
+              <div class="product-section-content">
+                <ul class="product-list">
+                  <li class="product-item">
+                    <a href="./index.html">
+                      <div class="product-card">
+                        <div class="product-card-image">
+                          <img
+                            src="{% static 'assets/images/img-recommendation-01.jpg' %}"
+                            alt=""
+                          />
+                        </div>
+
+                        <span class="product-card-brand">emk</span>
+                        <h3 class="product-card-title">
+                          시즌템! 감성 레트로 전기히터 EQH-S1612 3 colors
+                        </h3>
+
+                        <div class="product-card-price">
+                          <span class="percent">72%</span>
+                          <strong class="price">{{product.sale_price|intcomma}}</strong>
+                        </div>
+
+                        <dl class="product-card-detail">
+                          <div class="rating">
+                            <dt>
+                              <i class="ic-star"></i>
+                              <span class="visually-hidden">평점</span>
+                            </dt>
+                            <dd>4.6</dd>
+                          </div>
+                          <div class="review">
+                            <dt>리뷰</dt>
+                            <dd>3,605</dd>
+                          </div>
+                        </dl>
+
+                        <strong class="tag-gray">무료배송</strong>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="product-item">
+                    <a href="./index.html">
+                      <div class="product-card">
+                        <div class="product-card-image">
+                          <img
+                            src="{% static 'assets/images/img-recommendation-03.jpg' %}"
+                            alt=""
+                          />
+                        </div>
+
+                        <span class="product-card-brand">
+                          플러스마이너스제로
+                        </span>
+                        <h3 class="product-card-title">
+                          원적외선 2단 히터 XHS-Y010
+                        </h3>
+
+                        <div class="product-card-price">
+                          <span class="percent">10%</span>
+                          <strong class="price">88,200</strong>
+                        </div>
+
+                        <dl class="product-card-detail">
+                          <div class="rating">
+                            <dt>
+                              <i class="ic-star"></i>
+                              <span class="visually-hidden">평점</span>
+                            </dt>
+                            <dd>4.5</dd>
+                          </div>
+                          <div class="review">
+                            <dt>리뷰</dt>
+                            <dd>28</dd>
+                          </div>
+                        </dl>
+
+                        <strong class="tag-gray">무료배송</strong>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="product-item">
+                    <a href="./index.html">
+                      <div class="product-card">
+                        <div class="product-card-image">
+                          <img
+                            src="{% static 'assets/images/img-recommendation-02.jpg' %}"
+                            alt=""
+                          />
+                        </div>
+
+                        <span class="product-card-brand">
+                          플러스마이너스제로
+                        </span>
+                        <h3 class="product-card-title">
+                          리플렉트 에코히터 4colors
+                        </h3>
+
+                        <div class="product-card-price">
+                          <span class="percent">23%</span>
+                          <strong class="price">129,000</strong>
+                        </div>
+
+                        <dl class="product-card-detail">
+                          <div class="rating">
+                            <dt>
+                              <i class="ic-star"></i>
+                              <span class="visually-hidden">평점</span>
+                            </dt>
+                            <dd>4.6</dd>
+                          </div>
+                          <div class="review">
+                            <dt>리뷰</dt>
+                            <dd>605</dd>
+                          </div>
+                        </dl>
+
+                        <strong class="tag-gray">무료배송</strong>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="product-item">
+                    <a href="./index.html">
+                      <div class="product-card">
+                        <div class="product-card-image">
+                          <img
+                            src="{% static 'assets/images/img-recommendation-04.jpg' %}"
+                            alt=""
+                          />
+                        </div>
+
+                        <span class="product-card-brand"> 코시나 </span>
+                        <h3 class="product-card-title">
+                          오방난로 히터 6종 모음전
+                        </h3>
+
+                        <div class="product-card-price">
+                          <span class="percent">52%</span>
+                          <strong class="price">56,900</strong>
+                        </div>
+
+                        <dl class="product-card-detail">
+                          <div class="rating">
+                            <dt>
+                              <i class="ic-star"></i>
+                              <span class="visually-hidden">평점</span>
+                            </dt>
+                            <dd>4.6</dd>
+                          </div>
+                          <div class="review">
+                            <dt>리뷰</dt>
+                            <dd>250</dd>
+                          </div>
+                        </dl>
+
+                        <strong class="tag-gray">무료배송</strong>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </section>
+            <div
+              class="product-section-divider sm-only"
+              aria-hidden="true"
+            ></div>
+          </div>
+
+          <div class="col-lg-4 lg-only">
+            <form
+              class="floating-order-form order-form"
+              action="/"
+              method="POST"
+            >
+
+
+
+
+              <dl class="order-summary">
+                <dt>주문금액</dt>
+                <dd>
+                  <output
+                    for="floating-order-form-select-1 floating-order-form-select-2"
+                  >
+                    <div class="price-20">
+                      <strong class="amount">{{product.sale_price|intcomma}}</strong>
+                      <span class="currency">원</span>
+                    </div>
+                  </output>
+                </dd>
+              </dl>
+
+              <div class="button-group">
+                <!-- NOTE: 북마크를 하지 않았을 때 -->
+                <button
+                  class="bookmark-button btn-55"
+                  type="button"
+                  aria-label="북마크에 추가"
+                >
+                  <i class="ic-bookmark" aria-hidden="true"></i>
+                </button>
+                <!-- NOTE: 북마크를 했을 때 -->
+                <!-- <button
+                  class="bookmark-button btn-55 is-active"
+                  type="button"
+                  aria-label="북마크에 해제"
+                >
+                  <i class="ic-bookmark-filled" aria-hidden="true"></i>
+                </button> -->
+                <button class="btn-outlined btn-55" type="button">
+                  장바구니
+                </button>
+                <button class="btn-primary btn-55" type="submit">
+                  구매하기
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-cta lg-hidden">
+        <!-- NOTE: 북마크를 하지 않았을 때 -->
+        <button class="btn-bookmark btn-48 btn-ghost" type="button">
+          <i class="ic-bookmark" aria-hidden="true"></i>
+          <span aria-label="북마크 18392회">18,392</span>
+        </button>
+
+        <!-- NOTE: 북마크를 했을 때 -->
+        <!-- <button class="btn btn-48 btn-ghost is-active" type="button">
+          <i class="ic-bookmark-filled" aria-hidden="true"></i>
+          <span aria-label="북마크 18393회">18,393</span>
+        </button> -->
+        <button class="btn-order btn-48 btn-primary" type="button">
+          구매하기
+        </button>
+      </div>
+
+{% endblock %}

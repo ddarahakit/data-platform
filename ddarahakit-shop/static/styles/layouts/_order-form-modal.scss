@@ -1,0 +1,59 @@
+.order-form-modal {
+  @include no-scrollbar;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: $order-form-modal-level;
+  display: none;
+  width: 100%;
+  max-height: 75vh;
+  padding-top: 16px;
+  overflow-y: auto;
+  background-color: $white;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 20px rgba($black, 0.15);
+  overscroll-behavior: contain;
+
+  &.is-open {
+    display: block;
+    animation-duration: 250ms;
+    animation-name: modal-fade-in;
+    animation-timing-function: ease-in-out;
+  }
+
+  .order-inputs {
+    margin-bottom: 8px;
+  }
+
+  .order-checkouts {
+    margin: 0;
+  }
+
+  .order-summary {
+    margin: 16px 0;
+    margin-bottom: 48px + (4px * 2) + 16px;
+  }
+
+  .button-group {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 4px;
+    background-color: $white;
+  }
+
+  @include responsive(T) {
+    padding-top: 32px;
+  }
+}
+
+@keyframes modal-fade-in {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}

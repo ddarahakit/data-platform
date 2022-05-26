@@ -5,6 +5,12 @@
 ![platform_image](https://github.com/ddarahakit/data-platform/blob/master/images/platform_white.png)
 
 
+## 플랫폼 설명
+
+### HDFS - HA 구성
+zookeeper 알아보자....
+
+
 ### 1. RBD - Logstash - Elasticsearch
 
 RDB에서 상품 데이터를 역색인 

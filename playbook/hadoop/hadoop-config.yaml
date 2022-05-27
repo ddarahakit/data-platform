@@ -1,0 +1,18 @@
+- hosts: ["zookeeper1"]
+  pre_tasks:
+    - name: check zookeeper installed
+      stat:
+        path: /opt/zookeeper
+      register: zookeeper_installed
+
+  tasks:
+  - name: "copy zoo.cfg"
+    copy:
+      src: "/root/ansible/conf/zoo.cfg"
+      dest: "/opt/zookeeper/conf/zoo.cfg"
+
+  - name: "config zookeeper myid"
+    shell: |
+      echo 1 > /opt/zookeeper/myid
+    become: yes
+    when: zookeeper_installed.stat.exists

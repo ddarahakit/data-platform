@@ -1,0 +1,7 @@
+- hosts: ["namenode-active", "namenode-standby", "datanode1", "datanode2", "zookeeper"]
+  tasks:
+  - name: "config /etc/hosts file"
+    shell: |
+      if [ "127" -eq `head -2 /etc/hosts | tail -1 | cut -d'.' -f1` ]; then sed -i '2d' /etc/hosts; fi
+      echo "172.30.1.101 namenode-active\n172.30.1.102 namenode-standby\n172.30.1.103 datanode1\n172.30.1.104 datanode2\n172.30.1.201 zookeeper1" >> /etc/hosts
+    become: yes

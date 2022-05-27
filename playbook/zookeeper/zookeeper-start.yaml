@@ -1,0 +1,12 @@
+- hosts: ["zookeeper1"]
+  pre_tasks:
+    - name: check zookeeper installed
+      stat:
+        path: /opt/zookeeper
+      register: zookeeper_installed
+
+  tasks:
+  - name: "zookeeper start"
+    shell: "nohup /opt/zookeeper/bin/zkServer.sh start &"
+    when: zookeeper_installed.stat.exists
+

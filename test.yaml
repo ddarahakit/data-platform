@@ -1,0 +1,6 @@
+- hosts: ["namenode-active","namenode-standby","datanode1","datanode2","zookeeper1"]
+  tasks:
+  - name: "install jdk"
+    apt:
+      name: openjdk-11-jdk
+    become: yes

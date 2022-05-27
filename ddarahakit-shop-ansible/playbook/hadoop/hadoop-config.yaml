@@ -1,18 +1,24 @@
-- hosts: ["zookeeper1"]
-  pre_tasks:
-    - name: check zookeeper installed
-      stat:
-        path: /opt/zookeeper
-      register: zookeeper_installed
-
+- hosts: ["namenode-active","namenode-standby","datanode1","datanode2"]
   tasks:
-  - name: "copy zoo.cfg"
-    copy:
-      src: "/root/ansible/conf/zoo.cfg"
-      dest: "/opt/zookeeper/conf/zoo.cfg"
-
-  - name: "config zookeeper myid"
+  - name: "mkdir data directory"
     shell: |
-      echo 1 > /opt/zookeeper/myid
-    become: yes
-    when: zookeeper_installed.stat.exists
+      rm -rf /data
+      mkdir -p /data/hdfs/namenode
+      mkdir -p /data/hdfs/datanode
+      mkdir -p /data/hdfs/journalnode
+      mkdir -p /data/yarn/nodemanager
+      mkdir -p /data/yarn/resourcemanager
+      mkdir -p /opt/hadoop/logs
+      mkdir -p /opt/hadoop/pids
+
+  - name: "copy config files"
+    copy:
+      src: "/root/ansible/conf/hadoop/{{ item }}"
+      dest: "/opt/hadoop/etc/hadoop/{{ item }}"
+    with_items:  
+    - core-site.xml  
+    - yarn-site.xml 
+    - yarn-env.sh  
+    - mapred-site.xml  
+    - hdfs-site.xml
+    - hadoop-env.sh  

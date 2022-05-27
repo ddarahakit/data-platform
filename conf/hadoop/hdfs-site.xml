@@ -20,24 +20,24 @@
     <value>namenode-active,namenode-standby</value>
   </property>
   <property>
-    <name>dfs.namenode.rpc-address.hadoop-cluster.nn1</name>
-    <value>hadoop01:8020</value>
+    <name>dfs.namenode.rpc-address.hadoop-cluster.namenode-active</name>
+    <value>namenode-active:8020</value>
   </property>
   <property>
-    <name>dfs.namenode.rpc-address.hadoop-cluster.nn2</name>
-    <value>hadoop02:8020</value>
+    <name>dfs.namenode.rpc-address.hadoop-cluster.namenode-standby</name>
+    <value>namenode-standby:8020</value>
   </property>
   <property>
-    <name>dfs.namenode.http-address.hadoop-cluster.nn1</name>
-    <value>hadoop01:50070</value>
+    <name>dfs.namenode.http-address.hadoop-cluster.namenode-active</name>
+    <value>namenode-active:50070</value>
   </property>
   <property>
-    <name>dfs.namenode.http-address.hadoop-cluster.nn2</name>
-    <value>hadoop02:50070</value>
+    <name>dfs.namenode.http-address.hadoop-cluster.namenode-standby</name>
+    <value>namenode-standby:50070</value>
   </property>
   <property>
     <name>dfs.namenode.shared.edits.dir</name>
-    <value>qjournal://hadoop01:8485;hadoop02:8485;hadoop03:8485/hadoop-cluster</value>
+    <value>qjournal://namenode-active:8485;namenode-standby:8485;datanode1:8485/hadoop-cluster</value>
   </property>
   <property>
     <name>dfs.client.failover.proxy.provider.hadoop-cluster</name>

@@ -8,7 +8,7 @@
   tasks:
   - name: "copy zoo.cfg"
     copy:
-      src: "/root/ansible/conf/zoo.cfg"
+      src: "/root/ansible/conf/zookeeper/zoo.cfg"
       dest: "/opt/zookeeper/conf/zoo.cfg"
 
   - name: "config zookeeper myid"

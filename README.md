@@ -4,11 +4,15 @@
 ### 데이터 파이프라인 설계도
 ![platform_image](https://github.com/ddarahakit/data-platform/blob/master/images/platform_white.png)
 
+## 파일 설명
+- ansible : 플랫폼을 구성하는 각 시스템들을 ansible로 관리
+- ddarahakit-shop : 따라학잇 샵 djsngo 프로젝트
+- images : 포트폴리오에 필요한 각종 이미지 저장 폴더
 
 ## 플랫폼 설명
 
 ### HDFS - HA 구성
-zookeeper 알아보자....
+zookeeper 
 
 
 ### 1. RBD - Logstash - Elasticsearch

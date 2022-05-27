@@ -1,0 +1,13 @@
+all:
+  children:
+    namenode:
+      hosts:
+        namenode-active:
+        namenode-standby:
+    datanode:
+      hosts:
+        datanode1:
+        datanode2:
+    zookeeper:
+      hosts:
+        zookeeper1:

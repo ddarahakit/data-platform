@@ -76,6 +76,14 @@ ansible로 해보기 전에 일단 설정해보고 확인
 ![platform_image](https://github.com/ddarahakit/ddarahakit-shop-ansible/blob/master/images/nn2.png)
 
 
+1. 주키퍼 포맷 namenode-active $HADOOP_HOME/bin/hdfs zkfc -formatZK
+2. 저널노드 시작 namenode-active, namenode-standby, datanode1 $HADOOP_HOME/bin/hdfs --daemon start journalnode
+3. 네임노드 포맷 namenode-active hdfs $HADOOP_HOME/bin/hdfs namenode -format
+4. Active 네임노드 실행 namenode-active $HADOOP_HOME/bin/hdfs --daemon start namenode
+5. Active 네임노드의 메타데이터를 Standby로 복사 namenode-standby $HADOOP_HOME/bin/hdfs namenode -bootstrapStandby
+6. Standby 네임노드 실행 namenode-sandby $HADOOP_HOME/bin/hdfs --daemon start namenode
+7. Zookeeper 장애 컨트롤러 시작(zkfc) namenode-active, namenode-standby  $HADOOP_HOME/bin/hdfs --daemon start zkfc
+8.
 
 ### 11.
 ### 12.

@@ -24,11 +24,11 @@
    순서가 지정된 태스크 목록이 저장되어 지정된 작업을 해당 순서로 반복적으로 실행할 수 있습니다.
    플레이 북에는 변수와 작업이 포함될 수 있습니다. 플레이 북은 YAML로 작성됩니다.
 
-### 1. 설치
+### 01. 설치
 
 > apt install ansible
 
-### 2. 노드 host이름 설정
+### 02. 노드 host이름 설정
 
 > 172.30.1.10 ansible  
 > 172.30.1.101 namenode-active  
@@ -37,31 +37,44 @@
 > 172.30.1.104 datanode2  
 > 172.30.1.201 zookeeper1
 
-### 3. ssh 설정
+### 03. ssh 설정
 
 1. ansible 제어 노드
    > ssh-keygen  
    > ssh-copy-id [사용자]@[매니지드 노드들]
 
-### 4. 각 노드 파이썬 설정
+### 04. 각 노드 파이썬 설정
 
 > ln -s python3.6 /usr/bin/python
 
-### 5. 인벤토리 생성
+### 05. 인벤토리 생성
 
 > inventory/hosts.yaml
 
-### 6. ansible로 ping테스트
+### 06. ansible로 ping테스트
 
 > ansible all -i hosts.yaml -m ping
 
-### 7. ansible로 hadoop 다운
+### 07. ansible로 hadoop 다운
 
-> playbook/hadoop-download.yaml  
->  ansible-playbook -i inventory/hosts.yaml hadoop-download.yaml
+> playbook/hadoop/hadoop-download.yaml  
+>  ansible-playbook -i inventory/hosts.yaml playbook/hadoop/hadoop-download.yaml
 
-### 8. ansible로 hadoop 다운
+### 08. ansible로 hadoop 다운
 
-> playbook/zookeeper-download.yaml  
->  ansible-playbook -i inventory/hosts.yaml zookeeper-download.yaml
+> playbook/zookeeper/zookeeper-download.yaml  
+>  ansible-playbook -i inventory/hosts.yaml playbook/zookeeper/zookeeper-download.yaml
 
+### 09. ansible로 hadoop 하둡 디렉토리 및 설정 파일 복사
+
+> playbook/hadoop/hadoop-config.yaml  
+>  ansible-playbook -i inventory/hosts.yaml playbook/hadoop/hadoop-config.yaml
+
+### 10.
+ansible로 해보기 전에 일단 설정해보고 확인
+![platform_image](https://github.com/ddarahakit/data-platform/blob/master/images/platform_white.png)
+
+
+
+### 11.
+### 12.

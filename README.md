@@ -72,7 +72,8 @@
 
 ### 10.
 ansible로 해보기 전에 일단 설정해보고 확인
-![platform_image](https://github.com/ddarahakit/data-platform/blob/master/images/platform_white.png)
+![platform_image](https://github.com/ddarahakit/ddarahakit-shop-ansible/blob/master/images/nn1.png)
+![platform_image](https://github.com/ddarahakit/ddarahakit-shop-ansible/blob/master/images/nn2.png)
 
 
 
